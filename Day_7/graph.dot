@@ -1,0 +1,23 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eip.eip (expand)" [label = "aws_eip.eip", shape = "box"]
+		"[root] aws_eip_association.graph_eip (expand)" [label = "aws_eip_association.graph_eip", shape = "box"]
+		"[root] aws_instance.my-instance (expand)" [label = "aws_instance.my-instance", shape = "box"]
+		"[root] data.aws_ami.amazon (expand)" [label = "data.aws_ami.amazon", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.region" [label = "var.region", shape = "note"]
+		"[root] aws_eip.eip (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_eip_association.graph_eip (expand)" -> "[root] aws_eip.eip (expand)"
+		"[root] aws_eip_association.graph_eip (expand)" -> "[root] aws_instance.my-instance (expand)"
+		"[root] aws_instance.my-instance (expand)" -> "[root] data.aws_ami.amazon (expand)"
+		"[root] data.aws_ami.amazon (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_eip_association.graph_eip (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_eip_association.graph_eip (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.region"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
